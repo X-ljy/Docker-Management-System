@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace MapperXML 对应的java接口名 -->
+<mapper namespace="com.ljy.springboot.docker.managementsystem.mapper.UserMapper" >
+    <select id="getAllUser"  resultType="com.ljy.springboot.docker.managementsystem.entity.User">
+        select * from user
+    </select>
+    <insert id="installUser" parameterType="com.ljy.springboot.docker.managementsystem.entity.User" >
+        insert into user(phonenumber,name,passwd) values(#{phonenumber},#{name},#{passwd})
+    </insert>
+    <delete id="deleteUser" parameterType="java.lang.String">
+        delete from user where phonenumber=#{phonenumber}
+    </delete>
+    <select id="getUserPasswd"  resultType="java.lang.String">
+        select  passwd from user where phonenumber=#{phonenumber}
+    </select>
+</mapper>

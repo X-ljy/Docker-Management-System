@@ -1,0 +1,88 @@
+<html>
+<head>
+    <meta charset='utf-8'>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style>
+	.popover {
+    width:auto;
+    max-width:800px;
+	}
+	</style>
+	<script>
+	$(document).ready(function(){
+		$.ajax({
+			url: "",
+			data: data,
+			dataType: "json",
+			type: "get",
+			success: function(data){
+				var html = "";
+				var len = data.length;
+				for(var i=0; i<len; i++){
+					html += "<tr>" + "<td><a id="temp1" tabindex="0"  role="button" data-toggle="popover"  title="Basic Information" class="btn btn-primary">" + data[i]. + "</a></td>" + "</tr>";
+				}
+				$("ulul").html(html);
+			}
+		});
+	});
+	</script>
+	<script>
+	$(document).ready(function() { 
+		$('#temp').popover( { 
+		trigger:'click', //触发方式 
+		template: '', //你自定义的模板 
+		title:"标题",//设置 弹出框 的标题 
+		html: true, // 为true的话，data-content里就能放html代码了 
+		content:"",//这里可以直接写字符串，也可以 是一个函数，该函数返回一个字符串； 
+		} ); 
+	}
+	//常用方法：
+	$('#element').popover('show'); 
+	$('#element').popover('hide'); 
+	$('#element').popover('destroy')
+	</script>
+<script>
+    $(function () {
+      $('[data-toggle="popover"]').each(function () {
+        var element = $(this);
+        var id = element.attr('id');
+        var txt = element.html();
+        element.popover({
+          trigger: 'manual',
+          placement: 'right', //top, bottom, left or right
+          title: txt,
+          html: 'true',
+          content: ContentMethod(txt),
+        }).on("mouseenter", function () {
+          var _this = this;
+          $(this).popover("show");
+          $(this).siblings(".popover").on("mouseleave", function () {
+            $(_this).popover('hide');
+          });
+        }).on("mouseleave", function () {
+          var _this = this;
+          setTimeout(function () {
+            if (!$(".popover:hover").length) {
+              $(_this).popover("hide")
+            }
+          }, 100);
+        });
+      });
+    });
+    function ContentMethod() {
+      return '<table class="table"><tr class="success"><td>镜像数量</td><td></td></tr>' +
+          '<tr  class="warning"><td>容器--正常运行</td><td></td></tr>' +
+          '<tr class="danger"><td>容器--异常状态</td><td></td></tr>';
+    }
+  </script>
+</head>
+<body>
+ <table id="ulul"></table>
+ <div id="LinkDIV" style="float:left;width:200px"> </div>
+</body> 
+</html>

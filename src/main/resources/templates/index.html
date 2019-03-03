@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>docker-management</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <script src="/assets/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        #log{
+            color: #00bfff;
+            font-weight: bold;
+            font-size:larger;
+        }
+    </style >
+
+
+
+    <script>
+        function enterServerIP() {
+            var serverIP = document.getElementById("hostip").value;
+            console.log(serverIP);
+            $.ajax({
+                url: '/insertIP',
+                type: 'post',
+                data: {"ip": serverIP},
+                datatype: "TEXT",
+                success: function (response) {
+                    alert(response + "response");
+                    if (response == 1) {
+                        alert("录入成功");
+                    } else {
+                        alert("录入失败失败，请检查服务器docker设置！！！");
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        function getServerMsg() {
+           var table =  document.getElementById("hosttab");
+            table.append("<div style=\"background-image:url('/assets/img/1r.png') ;width:470px;height:150px\"><span style=\"color: #00a23f;text-align: center\">http://192.168.2.36:2375</span></div>");
+        }
+        getServerMsg();
+    </script>
+</head>
+
+<body data-type="index">
+    <script src="/assets/js/theme.js"></script>
+    <div class="am-g tpl-g">
+        <!-- 头部 -->
+        <header>
+            <!-- logo -->
+            <div id="log" class="am-fl tpl-header-logo">
+                <h1>docker</h1>
+            </div>
+
+            <!-- 右侧内容 -->
+            <div class="tpl-header-fluid">
+                <!-- 侧边切换 -->
+                <div class="am-fl tpl-header-switch-button am-icon-list">
+                    <span>
+
+                </span>
+                </div>
+                <!-- 搜索 -->
+                <div class="am-fl tpl-header-search">
+                    <form class="tpl-header-search-form" action="javascript:;">
+                        <button class="tpl-header-search-btn am-icon-search"></button>
+                        <input class="tpl-header-search-box" type="text" placeholder="搜索内容...">
+                    </form>
+                </div>
+                <!-- 其它功能-->
+                <div class="am-fr tpl-header-navbar">
+                    <ul>
+                        <!-- 新邮件 -->
+                        <li class="am-dropdown tpl-dropdown" data-am-dropdown>
+                            <a href="javascript:;" class="am-dropdown-toggle tpl-dropdown-toggle" data-am-dropdown-toggle>
+                                <i class="am-icon-envelope"></i>
+                            <!-- 弹出列表 -->
+                            <ul class="am-dropdown-content tpl-dropdown-content">
+
+                                <li class="tpl-dropdown-menu-messages">
+                                    <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
+                                        <i class="am-icon-circle-o"></i> 进入列表…
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- 新提示 -->
+                        <li class="am-dropdown" data-am-dropdown>
+                            <a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle>
+                                <i class="am-icon-bell"></i>
+                            </a>
+                            <!-- 弹出列表 -->
+                            <ul class="am-dropdown-content tpl-dropdown-content">
+                                <li class="tpl-dropdown-menu-notifications">
+                                    <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">
+                                        <i class="am-icon-bell"></i> 进入列表…
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- 退出 -->
+                        <li class="am-text-sm">
+                            <a href="javascript:;">
+                                <span class="am-icon-sign-out"></span> 注销
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <!-- 风格切换 -->
+        <div class="tpl-skiner">
+            <div class="tpl-skiner-toggle am-icon-cog">
+            </div>
+            <div class="tpl-skiner-content">
+                <div class="tpl-skiner-content-title">
+                    选择主题
+                </div>
+                <div class="tpl-skiner-content-bar">
+                    <span class="skiner-color skiner-white" data-color="theme-white"></span>
+                    <span class="skiner-color skiner-black" data-color="theme-black"></span>
+                </div>
+            </div>
+        </div>
+        <!-- 侧边导航栏 -->
+        <div class="left-sidebar">
+            <!-- 用户信息 -->
+            <div class="tpl-sidebar-user-panel">
+                <div class="tpl-user-panel-slide-toggleable">
+                    <div class="tpl-user-panel-profile-picture">
+                        <img src="/assets/img/user05.png" alt="">
+                    </div>
+                    <span class="user-panel-logged-in-text">
+              <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
+              禁言小张
+          </span>
+                </div>
+            </div>
+
+            <!-- 菜单 -->
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-link">
+                    <a href="/index" class="active">
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="/images" class="active">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 镜像
+                    </a>
+                </li>
+
+                <li class="sidebar-nav-link">
+                        <a href="/containers" class="active">
+                            <i class="am-icon-table sidebar-nav-link-logo"></i> 容器
+                        </a>
+                </li>
+
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 用户管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a href="/deleteuser">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 删除用户
+                            </a>
+                        </li>
+
+                        <li class="sidebar-nav-link">
+                            <a href="/reguser">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 注册用户
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <!-- 内容区域 -->
+        <div class="tpl-content-wrapper">
+
+            <div class="container-fluid am-cf">
+                <div class="row">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
+                        <div class="page-header-heading"><span class="am-icon-home page-header-heading-icon"></span> 首页 </div>
+                    </div>
+                    <div class="am-u-lg-3 tpl-index-settings-button">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row-content am-cf">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-8 widget-margin-bottom-lg">
+                        <div class="widget am-cf widget-body-lg">
+                            <div class="widget-body  am-fr">
+
+
+                                <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                                    <div class="am-form-group">
+                                        <div class="am-btn-toolbar">
+                                            <div class="container">
+                                                <!-- 按钮：用于打开模态框 -->
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#index">
+                                                    录入主机
+                                                </button>
+
+                                                <!-- 模态框 -->
+                                                <div class="modal fade" id="index">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+
+                                                            <!-- 模态框头部 -->
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">录入主机</h4>
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            </div>
+
+                                                            <!-- 模态框主体 -->
+                                                            <div class="modal-body">
+
+                                                                <form>
+                                                                    <div class="form-group">
+                                                                        <label for="hostip">目标主机:</label>
+                                                                        <input type="text" class="form-control" id="hostip" placeholder="Enter IP">
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <form>
+                                                                <!-- 模态框底部 -->
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" onclick="enterServerIP()" class="btn btn-primary">录入</button>
+                                                                    <button type="button" class=" btn btn-primary" data-dismiss="modal">取消</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="am-scrollable-horizontal "  >
+
+                                        <p id="hosttab">
+
+                                            <div style="background-image:url('/assets/img/1r.png') ;width:470px;height:150px"><span style="color: #00a23f;text-align: center">http://192.168.2.36:2375</span></div>
+
+                                        </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <script src="/assets/js/amazeui.min.js"></script>
+    <script src="/assets/js/amazeui.datatables.min.js"></script>
+    <script src="/assets/js/dataTables.responsive.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+</body>
+</html>

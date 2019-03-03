@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!--namespace MapperXML 对应的java接口名 -->
+<mapper namespace="com.ljy.springboot.docker.managementsystem.mapper.ServerIpMapper" >
+    <select id="getAllServerIP" resultType="com.ljy.springboot.docker.managementsystem.entity.ServerIp">
+        select * from server_ip
+    </select>
+    <delete id="deleteServerIP" parameterType="java.lang.String">
+        delete from server_ip where ip=#{ip}
+    </delete>
+    <insert id="insertServerIP" parameterType="java.lang.String">
+        insert into server_ip(ip) values ( #{ip} )
+    </insert>
+</mapper>
